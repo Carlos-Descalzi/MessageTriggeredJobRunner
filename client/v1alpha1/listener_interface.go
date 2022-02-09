@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"time"
 
-	apis "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis"
-	ltypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/messagelistener/v1alpha1"
+	apis "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis"
+	ltypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"k8s.io/apimachinery/pkg/watch"

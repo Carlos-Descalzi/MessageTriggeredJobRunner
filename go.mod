@@ -1,4 +1,4 @@
-module github.com/Carlos-Descalzi/MessageTriggeredJobRunner
+module github.com/Carlos-Descalzi/mtjobrunner
 
 go 1.17
 

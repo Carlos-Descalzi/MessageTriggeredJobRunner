@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	ifces "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/client/v1alpha1"
-	mtjobrunner "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/controller/mtjobrunner"
+	ifces "github.com/Carlos-Descalzi/mtjobrunner/client/v1alpha1"
+	mtjobrunner "github.com/Carlos-Descalzi/mtjobrunner/pkg/controller/mtjobrunner"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/kubernetes/scheme"
 	rest "k8s.io/client-go/rest"

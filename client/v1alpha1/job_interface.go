@@ -6,8 +6,8 @@ import (
 
 	"time"
 
-	apis "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis"
-	jtypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/mtjob/v1alpha1"
+	apis "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis"
+	jtypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"k8s.io/apimachinery/pkg/watch"

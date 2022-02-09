@@ -1,9 +1,9 @@
 package v1alpha1
 
 import (
-	apis "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis"
-	listenertypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/messagelistener/v1alpha1"
-	mtjobtypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/mtjob/v1alpha1"
+	apis "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis"
+	listenertypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
+	mtjobtypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/serializer"

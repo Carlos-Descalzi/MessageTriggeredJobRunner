@@ -3,7 +3,7 @@ package mtjobrunner
 import (
 	"encoding/base64"
 
-	types "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/mtjob/v1alpha1"
+	types "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
 )
 
 type Message struct {

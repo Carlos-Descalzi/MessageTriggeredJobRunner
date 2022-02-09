@@ -1,7 +1,7 @@
 package v1alpha1
 
 import (
-	apis "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis"
+	apis "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis"
 	batchv1 "k8s.io/api/batch/v1"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

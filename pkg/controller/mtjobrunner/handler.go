@@ -4,8 +4,8 @@ import (
 	"container/list"
 	"fmt"
 
-	ltypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/messagelistener/v1alpha1"
-	jtypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/mtjob/v1alpha1"
+	ltypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
+	jtypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
 	"go.uber.org/zap"
 )
 

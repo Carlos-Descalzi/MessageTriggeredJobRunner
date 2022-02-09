@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	ifces "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/client/v1alpha1"
-	ltypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/messagelistener/v1alpha1"
-	jtypes "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/mtjob/v1alpha1"
+	ifces "github.com/Carlos-Descalzi/mtjobrunner/client/v1alpha1"
+	ltypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
+	jtypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
 	"go.uber.org/zap"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"

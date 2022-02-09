@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	types "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/messagelistener/v1alpha1"
+	types "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"go.uber.org/zap"
 )
