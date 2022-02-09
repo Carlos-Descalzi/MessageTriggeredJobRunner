@@ -13,7 +13,7 @@ kind: MessageListener
 metadata:
   name: test-listener
 spec:
-  topic: events
+  topics: ['topic1','topic2']
   kafka:
     config:
       bootstrap.servers: 10.74.1.187:8080
@@ -29,7 +29,7 @@ metadata:
 spec:
   trigger:
     listenerName: test-listener
-    topic: events
+    topic: topic1
   jobTemplate:
     spec:
       template:
