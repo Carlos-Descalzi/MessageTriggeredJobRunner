@@ -1,0 +1,17 @@
+apiVersion: mtjobrunner.io/v1alpha1
+kind: MessageTriggeredJob
+metadata:
+  name: test-job
+spec:
+  trigger:
+    listenerName: test-listener
+    topic: dk-events
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: test-job
+              image: ubuntu:20.04
+              command: ["echo","hello world"]
+          restartPolicy: Never

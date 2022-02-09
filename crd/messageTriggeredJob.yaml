@@ -1,0 +1,61 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+    name: "messagetriggeredjobs.mtjobrunner.io"
+spec:
+  group: "mtjobrunner.io"
+  version: v1alpha1
+  names:
+    plural: messagetriggeredjobs
+    singular: messagetriggeredjob
+    kind: MessageTriggeredJob
+    listKind: MessageTriggeredJobList
+    shortNames:
+      - mtj
+  scope: Namespaced
+  subresources: {}
+  additionalPrinterColumns:
+    - name: ListenerName
+      type: string
+      description: Listener Name
+      JSONPath: .spec.trigger.listenerName
+    - name: Topic
+      type: string
+      description: The topic that triggers this job
+      JSONPath: .spec.trigger.topic
+    - name: Last Trigger
+      type: date
+      description: Last time the job was triggered
+      JSONPath: .status.lastTriggerTime
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: "messagelisteners.mtjobrunner.io"
+spec:
+  group: "mtjobrunner.io"
+  version: v1alpha1
+  names:
+    plural: messagelisteners
+    singular: messagelistener
+    kind: MessageListener
+    listKind: MessageListenerList
+    shortNames:
+      - ml
+  scope: Namespaced
+  subresources: {}
+  additionalPrinterColumns:
+    - name: Topic
+      type: string
+      description: The topic that triggers this job
+      JSONPath: .spec.topic
+    - name: Last Trigger
+      type: date
+      description: Last time the job was triggered
+      JSONPath: .status.lastTriggerTime
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp

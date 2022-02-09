@@ -1,0 +1,10 @@
+apiVersion: mtjobrunner.io/v1alpha1
+kind: MessageListener
+metadata:
+  name: test-listener
+spec:
+  topic: dk-events
+  kafka:
+    config:
+      bootstrap.servers: 10.74.1.187:8080
+      group.id: 'events'
