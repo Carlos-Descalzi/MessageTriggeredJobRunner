@@ -148,10 +148,10 @@ func (c *MessageTriggeredJobController) watchJobs() {
 }
 
 func (c *MessageTriggeredJobController) addJob(job *jtypes.MessageTriggeredJob) {
-	c.logger.Infof("New message triggered job %s/%s", job.Namespace, job.Name)
 	key := c.makeKey(job.Namespace, job.Spec.Trigger)
 
 	if _, ok := c.jobSpecs[key]; !ok {
+		c.logger.Infof("New message triggered job %s/%s", job.Namespace, job.Name)
 		c.jobSpecs[key] = jobReference{
 			namespace: job.Namespace,
 			name:      job.Name,
@@ -215,11 +215,11 @@ func (c *MessageTriggeredJobController) watchListeners() {
 }
 
 func (c *MessageTriggeredJobController) addSubscriberHandler(listener *ltypes.MessageListener) {
-	c.logger.Infof("New message listener %s/%s", listener.Namespace, listener.Name)
 
 	key := string(listener.UID)
 
 	if _, ok := c.handlers[key]; !ok {
+		c.logger.Infof("New message listener %s/%s", listener.Namespace, listener.Name)
 		handler := SubscriberHandlerNew(listener.Namespace, *listener, c.logger)
 		handler.AddListener(c)
 		c.handlers[string(listener.UID)] = handler
