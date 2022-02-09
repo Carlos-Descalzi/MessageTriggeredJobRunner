@@ -1,5 +1,5 @@
 TAG?=latest
-IMAGE_NAME=mtjobrunner:$(TAG)
+IMAGE_NAME=carlosdescalzi/mtjobrunner:$(TAG)
 SOURCES=cmd pkg/apis pkg/controller client/v1alpha1
 
 run: go run cmd/* -kubeconfig=$(KUBECONFIG) 

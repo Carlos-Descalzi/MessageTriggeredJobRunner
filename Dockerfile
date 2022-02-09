@@ -6,24 +6,26 @@ RUN mkdir /user \
     && echo 'daemon:x:2:2:daemon:/:' > /user/passwd \
     && echo 'daemon:x:2:' > /user/group
 
-RUN apk add --no-cache ca-certificates git
-
-RUN go get -u github.com/golang/dep/cmd/dep
+RUN apk add --no-cache ca-certificates git gcc musl-dev librdkafka-dev pkgconf
 
 WORKDIR ${GOPATH}/src/mtjobrunner
 
-COPY ./Gopkg.toml ./Gopkg.lock ./
-RUN dep ensure -vendor-only
+COPY client ./client
+COPY cmd ./cmd
+COPY pkg ./pkg
+COPY go.mod ./go.mod
+COPY go.sum ./go.sum
 
-COPY . ./
+#RUN go get k8s.io/client-go@v0.23.3 \
+#    github.com/confluentinc/confluent-kafka-go/kafka@v1.8.2 \
+#    go.uber.org/zap@v1.21.0
 
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w \
+RUN GOOS=linux go build -tags musl -tags dynamic -ldflags "-s -w" \
        -a -installsuffix 'static' -o /mtjobrunner ./cmd/*
 
-FROM scratch AS mtjobrunner
-
-COPY --from=builder /user/group /user/passwd /etc/
-COPY --from=builder /mtjobrunner /mtjobrunner
+RUN go clean --modcache
+RUN apk del gcc musl-dev librdkafka-dev pkgconf
+#RUN apk cache clean
 
 USER daemon:daemon
 

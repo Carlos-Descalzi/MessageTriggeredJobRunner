@@ -1,0 +1,127 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+    name: "messagetriggeredjobs.mtjobrunner.io"
+spec:
+  group: "mtjobrunner.io"
+  version: v1alpha1
+  names:
+    plural: messagetriggeredjobs
+    singular: messagetriggeredjob
+    kind: MessageTriggeredJob
+    listKind: MessageTriggeredJobList
+    shortNames:
+      - mtj
+  scope: Namespaced
+  subresources: {}
+  additionalPrinterColumns:
+    - name: ListenerName
+      type: string
+      description: Listener Name
+      JSONPath: .spec.trigger.listenerName
+    - name: Topic
+      type: string
+      description: The topic that triggers this job
+      JSONPath: .spec.trigger.topic
+    - name: Last Trigger
+      type: date
+      description: Last time the job was triggered
+      JSONPath: .status.lastTriggerTime
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mtjobrunner
+  labels:
+    name: mtjobrunner
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: mtjobrunner
+  labels:
+    name: mtjobrunner
+rules:
+  - apiGroups: ['mtjobrunner.io']
+    resources: ['*']
+    verbs: ['*']
+  - apiGroups: ['batch']
+    resources: ['jobs']
+    verbs: ['*']
+  - apiGroups: ['']
+    resources: ['events']
+    verbs: ['create', 'patch', 'update']
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: mtjobrunner
+  labels:
+    name: mtjobrunner
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: mtjobrunner
+subjects:
+  - kind: ServiceAccount
+    name: mtjobrunner
+    namespace: default
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: "messagelisteners.mtjobrunner.io"
+spec:
+  group: "mtjobrunner.io"
+  version: v1alpha1
+  names:
+    plural: messagelisteners
+    singular: messagelistener
+    kind: MessageListener
+    listKind: MessageListenerList
+    shortNames:
+      - ml
+  scope: Namespaced
+  subresources: {}
+  additionalPrinterColumns:
+    - name: Topic
+      type: string
+      description: The topic that triggers this job
+      JSONPath: .spec.topic
+    - name: Last Trigger
+      type: date
+      description: Last time the job was triggered
+      JSONPath: .status.lastTriggerTime
+    - name: Age
+      type: date
+      JSONPath: .metadata.creationTimestamp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mtjobrunner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mtjobrunner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: mtjobrunner
+    spec:
+      serviceAccountName: mtjobrunner
+      securityContext:
+        fsGroup: 2 #daemon
+      containers:
+        - name: mtjobrunner
+          image: carlosdescalzi/mtjobrunner:latest
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi

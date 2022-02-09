@@ -6,8 +6,8 @@ import (
 	"time"
 
 	types "github.com/Carlos-Descalzi/MessageTriggeredJobRunner/pkg/apis/messagelistener/v1alpha1"
+	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"go.uber.org/zap"
-	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 )
 
 type KafkaSubscriber struct {
