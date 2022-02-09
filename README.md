@@ -3,7 +3,7 @@ A kubernetes controller for dispatching jobs from events coming from services li
 
 For the moment only supports listening Kafka messages.
 
-Disclaimer: dockerfile is broken - WIP.
+'''Disclaimer: dockerfile is broken - WIP.'''
 
 # How it works
 First thing to do is to create a listener like this
