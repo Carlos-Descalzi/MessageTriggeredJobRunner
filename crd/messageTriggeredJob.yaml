@@ -48,10 +48,6 @@ spec:
   scope: Namespaced
   subresources: {}
   additionalPrinterColumns:
-    - name: Topic
-      type: string
-      description: The topic that triggers this job
-      JSONPath: .spec.topic
     - name: Last Trigger
       type: date
       description: Last time the job was triggered

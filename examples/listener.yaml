@@ -3,7 +3,7 @@ kind: MessageListener
 metadata:
   name: test-listener
 spec:
-  topic: dk-events
+  topics: ['dk-events','topic2']
   kafka:
     config:
       bootstrap.servers: 10.74.1.187:8080

@@ -43,9 +43,9 @@ func (l *SubscriberHandler) AddListener(listener interface{}) {
 func (l *SubscriberHandler) Start() error {
 
 	if l.config.Spec.Kafka.IsSet() {
-		l.subscriber = KafkaSubscriberNew(l.config.Name, l.config.Spec.Topic, l.config.Spec.Kafka, l.logger)
+		l.subscriber = KafkaSubscriberNew(l.config.Name, l.config.Spec.Topics, l.config.Spec.Kafka, l.logger)
 	} else if l.config.Spec.RabbitMQ.IsSet() {
-		l.subscriber = RabbitMQSubscriberNew(l.config.Name, l.config.Spec.Topic, l.config.Spec.RabbitMQ, l.logger)
+		l.subscriber = RabbitMQSubscriberNew(l.config.Name, l.config.Spec.Topics, l.config.Spec.RabbitMQ, l.logger)
 	} else {
 		return subscriberError{
 			fmt.Sprintf(
@@ -71,14 +71,14 @@ func (l *SubscriberHandler) loop() {
 
 			l.logger.Debugf(
 				"Received message from topic %s, on listener %s",
-				l.config.Spec.Topic,
+				message.Topic,
 				l.config.Name,
 			)
 
 			for listener := l.listeners.Front(); listener != nil; listener = listener.Next() {
 				listener.Value.(Listener).MessageReceived(
 					l.namespace,
-					jtypes.Trigger{ListenerName: l.config.Name, Topic: l.config.Spec.Topic},
+					jtypes.Trigger{ListenerName: l.config.Name, Topic: message.Topic},
 					message,
 				)
 			}

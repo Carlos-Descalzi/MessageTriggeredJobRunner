@@ -12,14 +12,14 @@ import (
 
 type KafkaSubscriber struct {
 	name     string
-	topic    string
+	topics   []string
 	config   types.KafkaListener
 	consumer *kafka.Consumer
 	logger   *zap.SugaredLogger
 }
 
-func KafkaSubscriberNew(name string, topic string, config types.KafkaListener, logger *zap.SugaredLogger) *KafkaSubscriber {
-	subscriber := KafkaSubscriber{topic: topic, config: config, logger: logger}
+func KafkaSubscriberNew(name string, topics []string, config types.KafkaListener, logger *zap.SugaredLogger) *KafkaSubscriber {
+	subscriber := KafkaSubscriber{topics: topics, config: config, logger: logger}
 	subscriber.init()
 	return &subscriber
 }
@@ -38,7 +38,7 @@ func (h *KafkaSubscriber) init() {
 		panic(err)
 	}
 	h.consumer = consumer
-	h.consumer.SubscribeTopics([]string{h.topic}, nil)
+	h.consumer.SubscribeTopics(h.topics, nil)
 }
 
 func (h *KafkaSubscriber) Next(timeout uint32) (*Message, error) {
@@ -61,6 +61,7 @@ func (h KafkaSubscriber) decodeMessage(message *kafka.Message) *Message {
 	for i := 0; i < len(message.Headers); i++ {
 		msg.Properties[strings.ToUpper(message.Headers[i].Key)] = string(message.Headers[i].Value)
 	}
+	msg.Topic = *message.TopicPartition.Topic
 	msg.Payload = message.Value
 
 	return &msg

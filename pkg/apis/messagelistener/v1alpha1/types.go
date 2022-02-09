@@ -26,7 +26,7 @@ type MessageListener struct {
 
 type MessageListenerSpec struct {
 	// queue topic
-	Topic string `json:"topic" protobuf:"bytes,1,opt,name=topic"`
+	Topics []string `json:"topics" protobuf:"bytes,1,opt,name=topics"`
 
 	// kafka configuration
 	Kafka KafkaListener `json:"kafka" protobuf:"bytes,2,opt,name=kafka"`

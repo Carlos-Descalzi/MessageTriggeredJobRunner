@@ -7,13 +7,13 @@ import (
 
 type RabbitMQSubscriber struct {
 	name   string
-	topic  string
+	topics []string
 	config types.RabbitMQListener
 	logger *zap.SugaredLogger
 }
 
-func RabbitMQSubscriberNew(name string, topic string, config types.RabbitMQListener, logger *zap.SugaredLogger) *RabbitMQSubscriber {
-	subscriber := RabbitMQSubscriber{name: name, topic: topic, logger: logger}
+func RabbitMQSubscriberNew(name string, topics []string, config types.RabbitMQListener, logger *zap.SugaredLogger) *RabbitMQSubscriber {
+	subscriber := RabbitMQSubscriber{name: name, topics: topics, logger: logger}
 	subscriber.init()
 	return &subscriber
 }
