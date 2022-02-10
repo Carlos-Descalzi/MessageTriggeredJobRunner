@@ -1,7 +1,7 @@
 package mtjobrunner
 
 import (
-	"internal/itoa"
+	"strconv"
 	"time"
 
 	types "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
@@ -77,7 +77,7 @@ func (s *RabbitMQSubscriber) decodeMessage(inputMsg amqp.Delivery, topic string)
 	message.Properties["ContentType"] = inputMsg.ContentType
 	message.Properties["ContentEncoding"] = inputMsg.ContentEncoding
 	message.Properties["CorrelationId"] = inputMsg.CorrelationId
-	message.Properties["Priority"] = itoa.Itoa(int(inputMsg.Priority))
+	message.Properties["Priority"] = strconv.Itoa(int(inputMsg.Priority))
 	message.Properties["ReplyTo"] = inputMsg.ReplyTo
 	message.Properties["MessageId"] = inputMsg.MessageId
 	message.Properties["Type"] = inputMsg.Type
