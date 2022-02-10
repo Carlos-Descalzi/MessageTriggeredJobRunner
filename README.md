@@ -3,7 +3,9 @@ A kubernetes controller for dispatching jobs from events coming from services li
 
 For the moment only supports listening Kafka messages.
 
-## WIP.
+## WIP
+Kafka listener works, rabbitmq is in progress.
+Deployment descriptor doesn't yet have a version tag on container spec.
 
 # How it works
 First thing to do is to create a listener like this
@@ -46,3 +48,9 @@ Message contents are passed as environment variables to the pod.
 - TRIGGERED_JOB_MESSAGE_BODY: The message body encoded in base64
 - TRIGGERED_JOB_MESSAGE_*: Any other message property.
 The format depends on if it is kafka or rabbitmq
+
+# Install
+
+```
+kubectl apply -f https://github.com/Carlos-Descalzi/mtjobrunner/blob/main/deploy/deployment.yaml
+```
