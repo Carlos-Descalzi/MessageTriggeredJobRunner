@@ -24,7 +24,7 @@ RUN GOOS=linux go build -tags musl -tags dynamic -ldflags "-s -w" \
        -a -installsuffix 'static' -o /mtjobrunner ./cmd/*
 
 RUN go clean --modcache
-RUN apk del gcc musl-dev librdkafka-dev pkgconf
+#RUN apk del gcc musl-dev librdkafka-dev pkgconf
 #RUN apk cache clean
 
 USER daemon:daemon
