@@ -3,6 +3,7 @@ package mtjobrunner
 import (
 	"container/list"
 	"fmt"
+	"time"
 
 	ltypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/messagelistener/v1alpha1"
 	jtypes "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
@@ -46,6 +47,8 @@ func (l *SubscriberHandler) Start() error {
 		l.subscriber = KafkaSubscriberNew(l.config.Name, l.config.Spec.Topics, l.config.Spec.Kafka, l.logger)
 	} else if l.config.Spec.RabbitMQ.IsSet() {
 		l.subscriber = RabbitMQSubscriberNew(l.config.Name, l.config.Spec.Topics, l.config.Spec.RabbitMQ, l.logger)
+	} else if l.config.Spec.ActiveMQ.IsSet() {
+		l.subscriber = ActiveMQSubscriberNew(l.config.Name, l.config.Spec.Topics, l.config.Spec.ActiveMQ, l.logger)
 	} else {
 		return subscriberError{
 			fmt.Sprintf(
@@ -65,7 +68,7 @@ func (l *SubscriberHandler) Start() error {
 func (l *SubscriberHandler) loop() {
 	for l.active {
 
-		message, err := l.subscriber.Next(1000)
+		message, err := l.subscriber.Next(1 * time.Second)
 
 		if err == nil && message != nil {
 

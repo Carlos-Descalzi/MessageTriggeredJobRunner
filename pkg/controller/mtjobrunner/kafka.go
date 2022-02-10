@@ -41,10 +41,10 @@ func (h *KafkaSubscriber) init() {
 	h.consumer.SubscribeTopics(h.topics, nil)
 }
 
-func (h *KafkaSubscriber) Next(timeout uint32) (*Message, error) {
+func (h *KafkaSubscriber) Next(timeout time.Duration) (*Message, error) {
 
 	if h.consumer != nil {
-		msg, err := h.consumer.ReadMessage(time.Duration(timeout * uint32(time.Millisecond)))
+		msg, err := h.consumer.ReadMessage(time.Duration(timeout))
 
 		if err != nil {
 			return nil, err

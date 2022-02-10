@@ -2,6 +2,7 @@ package mtjobrunner
 
 import (
 	"encoding/base64"
+	"time"
 
 	types "github.com/Carlos-Descalzi/mtjobrunner/pkg/apis/mtjob/v1alpha1"
 )
@@ -21,6 +22,6 @@ type Listener interface {
 }
 
 type Subscriber interface {
-	Next(timeout uint32) (*Message, error)
+	Next(timeout time.Duration) (*Message, error)
 	Stop()
 }

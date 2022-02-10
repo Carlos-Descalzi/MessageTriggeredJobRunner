@@ -61,6 +61,7 @@ require (
 	github.com/go-openapi/jsonreference v0.19.5 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
 	github.com/google/gops v0.3.22 // indirect
+	github.com/jjeffery/stomp v0.0.0-20160907031752-b994bda931e1
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/keybase/go-ps v0.0.0-20190827175125-91aafc93ba19 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
@@ -74,4 +75,9 @@ require (
 	k8s.io/code-generator v0.23.3 // indirect
 	k8s.io/gengo v0.0.0-20211129171323-c02415ce4185 // indirect
 	rsc.io/goversion v1.2.0 // indirect
+)
+
+require (
+	github.com/go-stomp/stomp v2.1.4+incompatible // indirect
+	github.com/streadway/amqp v1.0.0
 )

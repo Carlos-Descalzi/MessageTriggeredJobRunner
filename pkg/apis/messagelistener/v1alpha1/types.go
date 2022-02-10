@@ -33,6 +33,9 @@ type MessageListenerSpec struct {
 
 	// RabbitMQ configuration
 	RabbitMQ RabbitMQListener `json:"rabbitmq" protobuf:"bytes,3,opt,name=rabbitmq"`
+
+	// ActiveMQ configuration
+	ActiveMQ ActiveMQListener `json:"activemq" protobuf:"bytes,4,opt,name=activemq"`
 }
 
 func (j MessageListener) GetObjectKind() schema.ObjectKind {
@@ -60,7 +63,7 @@ func (j MessageListenerList) DeepCopyObject() runtime.Object {
 
 // Kafka consumer configuration
 type KafkaListener struct {
-	Config map[string]string `json:"config,omitempty" protobuf:"bytes,11,rep,name=config"`
+	Config map[string]string `json:"config,omitempty" protobuf:"bytes,1,rep,name=config"`
 }
 
 func (l KafkaListener) IsSet() bool {
@@ -68,9 +71,19 @@ func (l KafkaListener) IsSet() bool {
 }
 
 type RabbitMQListener struct {
-	// Not implemented yet
+	Url string `json:"url" protobuf:"bytes,1,opt,name=url"`
 }
 
 func (r RabbitMQListener) IsSet() bool {
-	return false
+	return r.Url != ""
+}
+
+type ActiveMQListener struct {
+	Network string
+	Address string
+	Options map[string]string
+}
+
+func (a ActiveMQListener) IsSet() bool {
+	return a.Network != "" && a.Address != ""
 }
