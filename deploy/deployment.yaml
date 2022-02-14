@@ -79,7 +79,7 @@ rules:
     verbs: ['*']
   - apiGroups: ['batch']
     resources: ['jobs']
-    verbs: ['*']
+    verbs: ['create']
   - apiGroups: ['']
     resources: ['events']
     verbs: ['create', 'patch', 'update']
